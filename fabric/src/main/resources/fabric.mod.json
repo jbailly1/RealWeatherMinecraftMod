@@ -1,11 +1,11 @@
 {
 	"schemaVersion": 1,
-	"id": "realweather",
+	"id": "real-weather-effects",
 	"version": "${version}",
-	"name": "RealWeather",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "RealWeatherEffects",
+	"description": "This mod will influence the player experience by the real weather depending of biomes type",
 	"authors": [
-		"Me!"
+		"jbailly"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
@@ -16,7 +16,7 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"net.jbdev.realweather.ExampleMod"
+			"net.jbdev.realweather.RealWeatherMod"
 		],
 		"fabric-datagen": [
 			"net.jbdev.realweather.ExampleModDataGenerator"
