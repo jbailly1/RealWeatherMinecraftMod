@@ -27,6 +27,11 @@ public class RealWeatherEffects implements IRealWeatherEffects {
     }
 
     @Override
+    public void init() {
+
+    }
+
+    @Override
     public boolean isEnabled() {
         return this.enable;
     }

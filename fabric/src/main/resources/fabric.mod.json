@@ -17,16 +17,12 @@
 	"entrypoints": {
 		"main": [
 			"net.jbdev.realweather.RealWeatherMod"
-		],
-		"fabric-datagen": [
-			"net.jbdev.realweather.ExampleModDataGenerator"
 		]
 	},
 	"mixins": [
-		"realweather.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.14.22",
+		"fabricloader": ">=0.14",
 		"minecraft": "~1.20.1",
 		"java": ">=17",
 		"fabric-api": "*"

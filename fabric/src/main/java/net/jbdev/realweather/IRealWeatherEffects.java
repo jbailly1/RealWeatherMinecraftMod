@@ -9,4 +9,5 @@ public interface IRealWeatherEffects {
     void enableTemperature(boolean enable);
     void enableAllEffects(boolean enable);
     String info();
+    void init();
 }

@@ -1,14 +1,14 @@
 package net.jbdev.realweather;
 
+import com.mojang.brigadier.arguments.BoolArgumentType;
 import net.fabricmc.api.ModInitializer;
-
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.text.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.mojang.brigadier.arguments.BoolArgumentType;
 
-import static net.minecraft.server.command.CommandManager.*;
+import static net.minecraft.server.command.CommandManager.argument;
+import static net.minecraft.server.command.CommandManager.literal;
 
 public class RealWeatherMod implements ModInitializer {
 	public static final String MOD_ID = "real-weather-effects";
@@ -24,11 +24,13 @@ public class RealWeatherMod implements ModInitializer {
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 
+
 		LOGGER.info("Thanks to use the real weather effects mod");
-        //TODO load config json file.
-		CommandRegistrationCallback.EVENT.register(((dispatcher, registryAccess, environment) ->
+        weatherEffects.init();
+        CommandRegistrationCallback.EVENT.register(((dispatcher, registryAccess, environment) ->
 			dispatcher.register(
                 literal(MOD_ID)
+                    .requires(cs -> cs.hasPermissionLevel(0))
                     .then(literal("enable")
                         .requires(source -> source.hasPermissionLevel(2))
                         .then(
