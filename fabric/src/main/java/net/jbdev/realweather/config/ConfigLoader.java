@@ -1,16 +1,13 @@
 package net.jbdev.realweather.config;
 
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import net.fabricmc.loader.api.FabricLoader;
 import net.jbdev.realweather.ConfigDto;
 import net.jbdev.realweather.RealWeatherMod;
 
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Scanner;
+import java.util.Objects;
 
 public class ConfigLoader {
     private static final String filename = String.format("%s.json", RealWeatherMod.MOD_ID);
@@ -19,27 +16,15 @@ public class ConfigLoader {
             .getConfigDir()
             .resolve(filename);
 
+
     public static ConfigDto load() {
-        try {
-            StringBuilder builder = new StringBuilder();
-            Scanner scanner = new Scanner(filenamePath);
-
-            while(scanner.hasNextLine()){
-                //process each line
-                String line = scanner.nextLine();
-                builder.append(line);
-            }
-            scanner.close();
-
-            return jsonToDto(JsonParser.parseString(builder.toString()).getAsJsonObject());
-        } catch (FileNotFoundException e) {
-            ConfigDto defaultConfig = new ConfigDto();
-            save(defaultConfig);
-            return load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if (!filenamePath.toFile().exists()) {
+            ResourceFileHelper.copy("assets/realweather/defaults.json", filenamePath);
         }
+
+        return jsonToDto(Objects.requireNonNull(LoadJsonFile.loadFile(filenamePath)));
     }
+
 
     private static ConfigDto jsonToDto(JsonObject jsonObject) {
         ConfigDto configDto = new ConfigDto();

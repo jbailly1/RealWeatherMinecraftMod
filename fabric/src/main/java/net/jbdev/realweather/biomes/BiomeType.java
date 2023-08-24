@@ -1,20 +1,29 @@
 package net.jbdev.realweather.biomes;
 
 public enum BiomeType {
-    TAIGA,
-    JUNGLE,
-    MESA,
-    PLAINS,
-    SAVANNA,
-    BEACH,
-    FOREST,
-    BIRCH_FOREST,
-    OCEAN,
-    DESERT,
-    RIVER,
-    SWAMP,
-    MUSHROOM,
-    MOUNTAIN,
-    BADLANDS,
-    DEEP_OCEAN,
+    TAIGA("TAIGA"),
+    JUNGLE("JUNGLE"),
+    MESA("MESA"),
+    PLAINS("PLAINS"),
+    SAVANNA("SAVANNA"),
+    BEACH("BEACH"),
+    FOREST("FOREST"),
+    OCEAN("OCEAN"),
+    DESERT("DESERT"),
+    RIVER("RIVER"),
+    SWAMP("SWAMP"),
+    MUSHROOM("MUSHROOM"),
+    MOUNTAIN("MOUNTAIN"),
+    BADLANDS("BADLANDS"),
+    DEEP_OCEAN("DEEP_OCEAN");
+
+    private String name;
+
+    BiomeType(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

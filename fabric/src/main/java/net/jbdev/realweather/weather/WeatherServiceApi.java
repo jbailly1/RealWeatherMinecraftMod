@@ -1,10 +1,11 @@
 package net.jbdev.realweather.weather;
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.jbdev.realweather.biomes.BiomeType;
 import net.jbdev.realweather.config.BiomeDto;
+import net.jbdev.realweather.config.BiomesConfig;
+import net.jbdev.realweather.config.BiomesConfigLoader;
 
 import java.io.*;
 import java.net.URL;
@@ -18,12 +19,21 @@ public class WeatherServiceApi implements IWeatherServiceApi {
     private final List<String> decimalParams = WeatherParameter.getDecimalParams();
     private final List<String> stringParams = WeatherParameter.getStringParams();
 
+    private BiomesConfig biomesConfig;
+
+    @Override
+    public void init() {
+        this.biomesConfig = BiomesConfigLoader.load();
+    }
+
     @Override
     public Map<BiomeType, WeatherDto> fetchAllBiomesTodayWeather() {
         var weatherPerBiomes = new HashMap<BiomeType, WeatherDto>();
 
         try {
-            weatherPerBiomes.put(BiomeType.PLAINS, this.fetchWeather(new BiomeDto(BiomeType.PLAINS, 47.4602, -114.8829)));
+            for (BiomeDto config : this.biomesConfig.biomes.values()) {
+                weatherPerBiomes.put(config.type, this.fetchWeather(config));
+            }
         } catch (IOException ignored) {
 
         }
