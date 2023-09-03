@@ -7,6 +7,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.world.biome.Biome;
+import org.slf4j.Logger;
 
 import static net.jbdev.realweather.RealWeatherMod.MOD_ID;
 import static net.minecraft.server.command.CommandManager.argument;
@@ -15,9 +16,13 @@ import static net.minecraft.server.command.CommandManager.literal;
 public class WeatherService implements IWeatherService {
 
     private final IRealWeatherEffects weatherEffects;
+    private final IWeatherServiceApi weatherServiceApi;
+    private final Logger logger;
 
-    public WeatherService(IRealWeatherEffects weatherEffects) {
+    public WeatherService(IRealWeatherEffects weatherEffects, IWeatherServiceApi weatherServiceApi, Logger logger) {
         this.weatherEffects = weatherEffects;
+        this.weatherServiceApi = weatherServiceApi;
+        this.logger = logger;
     }
 
     @Override
@@ -27,7 +32,7 @@ public class WeatherService implements IWeatherService {
 
     @Override
     public void update(ServerWorld world) {
-
+        //logger.info(String.format("World time %d", world.getTimeOfDay()));
     }
 
     @Override
